@@ -13,10 +13,12 @@
  * limitations under the License.
  *
 */
+
 namespace Talegen.Storage.Net.Aws
 {
     using System;
     using Amazon.S3;
+    using Common.Core.Extensions;
     using Talegen.Storage.Net.Core;
 
     /// <summary>
@@ -29,12 +31,24 @@ namespace Talegen.Storage.Net.Aws
         /// </summary>
         /// <param name="config">Contains an instance of the <see cref="Amazon.S3.AmazonS3Config" /> class.</param>
         /// <param name="bucketName">Contains the bucket name.</param>
-        public AwsS3StorageContext(AmazonS3Config config, string bucketName)
+        /// <param name="targetBucketName">Contains an optional target bucket name if different.</param>
+        public AwsS3StorageContext(AmazonS3Config config, string bucketName, string targetBucketName = "")
         {
-            this.Config = config;
-            this.WorkspaceUri = new Uri(config.ServiceURL); // new Uri(config.ServiceURL);
+            this.Config = config ?? throw new ArgumentNullException(nameof(config));
+            this.WorkspaceUri = new Uri(config.ServiceURL);
             this.UniqueWorkspace = true;
-            this.BucketName = bucketName;
+
+            if (!string.IsNullOrWhiteSpace(bucketName))
+            {
+                this.BucketName = bucketName;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(bucketName));
+            }
+
+            // default target to bucket name.
+            this.TargetBucketName = string.IsNullOrWhiteSpace(targetBucketName) ? this.BucketName : targetBucketName;
         }
 
         /// <summary>
@@ -49,7 +63,13 @@ namespace Talegen.Storage.Net.Aws
         /// <value>Contains the bucket name.</value>
         public string BucketName { get; }
 
+        /// <summary>
+        /// Gets or sets the target bucket name.
+        /// </summary>
+        public string TargetBucketName { get; }
+
         #region IStorageContext Members
+
         /// <summary>
         /// Gets the storage type.
         /// </summary>
@@ -66,12 +86,13 @@ namespace Talegen.Storage.Net.Aws
         /// </summary>
         /// <value>Contains the workspace URI.</value>
         public Uri WorkspaceUri { get; }
-        
+
         /// <summary>
         /// Gets the root workspace local folder path.
         /// </summary>
         /// <returns>Contains the root workspace local folder path.</returns>
-        public string RootWorkspaceLocalFolderPath => this.WorkspaceUri?.ToString();
+        public string RootWorkspaceLocalFolderPath => this.WorkspaceUri.ConvertToString();
+
         #endregion
     }
 }

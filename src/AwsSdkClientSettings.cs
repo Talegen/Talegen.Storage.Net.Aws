@@ -13,6 +13,7 @@
  * limitations under the License.
  *
 */
+
 using Amazon.S3;
 
 namespace Talegen.Storage.Net.Aws
