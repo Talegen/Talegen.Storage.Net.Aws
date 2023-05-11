@@ -9,36 +9,43 @@
     <Authors>Talegen, LLC</Authors>
 	<EnableNETAnalyzers>true</EnableNETAnalyzers>
     <PackageIcon>logo.png</PackageIcon>
+	  <PackageIconUrl />
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/Talegen/Talegen.Storage.Net.Aws</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Storage</PackageTags>
+    <PackageTags>storage</PackageTags>
     <PackageReleaseNotes>Initial release of completed interface implementation.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-	<Version>1.0.0.0</Version>
+	<Version>1.0.0</Version>
 	<AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>.\Talegen.Storage.Net.Aws.xml</DocumentationFile>
+	</PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
       <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+	<ItemGroup>
+		<None Include="Assets\logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.S3" Version="3.7.104.13" />
     <PackageReference Include="Talegen.Common.Core" Version="1.0.7" />
     <PackageReference Include="Talegen.Storage.Net.Core" Version="1.0.4" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="Assets\logo.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	
+	
 </Project>

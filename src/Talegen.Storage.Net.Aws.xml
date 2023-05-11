@@ -1,0 +1,1173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Talegen.Storage.Net.Aws</name>
+    </assembly>
+    <members>
+        <member name="T:Talegen.Storage.Net.Aws.AwsS3StorageContext">
+            <summary>
+            This class contains properties related to the storage service interfaces within the application.
+            </summary>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsS3StorageContext.#ctor(Amazon.S3.AmazonS3Config,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Talegen.Storage.Net.Aws.AwsS3StorageContext" /> class.
+            </summary>
+            <param name="config">Contains an instance of the <see cref="T:Amazon.S3.AmazonS3Config" /> class.</param>
+            <param name="bucketName">Contains the bucket name.</param>
+            <param name="targetBucketName">Contains an optional target bucket name if different.</param>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.Config">
+            <summary>
+            Gets the AWS SDK client settings.
+            </summary>
+            <value>Contains the AWS SDK client settings.</value>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.BucketName">
+            <summary>
+            Gets the bucket name.
+            </summary>
+            <value>Contains the bucket name.</value>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.TargetBucketName">
+            <summary>
+            Gets or sets the target bucket name.
+            </summary>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.StorageType">
+            <summary>
+            Gets the storage type.
+            </summary>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.UniqueWorkspace">
+            <summary>
+            Gets a value indicating whether this instance is unique workspace.
+            </summary>
+            <returns>Contains the value indicating whether this instance is unique workspace.</returns>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.WorkspaceUri">
+            <summary>
+            Gets the workspace URI.
+            </summary>
+            <value>Contains the workspace URI.</value>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsS3StorageContext.RootWorkspaceLocalFolderPath">
+            <summary>
+            Gets the root workspace local folder path.
+            </summary>
+            <returns>Contains the root workspace local folder path.</returns>
+        </member>
+        <member name="T:Talegen.Storage.Net.Aws.AwsSdkClientSettings">
+            <summary>
+            This class contains the settings needed for the AWS SDK client. This class cannot be inherited.
+            </summary>
+        </member>
+        <member name="T:Talegen.Storage.Net.Aws.AwsStorageService">
+            <summary>
+            This class implements the AWS Storage Service interface. This class cannot be inherited.
+            </summary>
+            <seealso cref="T:Talegen.Storage.Net.Core.IStorageService" />
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.#ctor(Talegen.Storage.Net.Aws.AwsS3StorageContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Talegen.Storage.Net.Aws.AwsStorageService" /> class.
+            </summary>
+            <param name="context">Contains an instance of the storage context.</param>
+        </member>
+        <member name="F:Talegen.Storage.Net.Aws.AwsStorageService.UploadLimit">
+            <summary>
+            Contains the upload limit buffer size.
+            </summary>
+        </member>
+        <member name="F:Talegen.Storage.Net.Aws.AwsStorageService.client">
+            <summary>
+            Contains the internal S3 client.
+            </summary>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsStorageService.Context">
+            <summary>
+            Gets the storage context.
+            </summary>
+            <value>Contains the storage context.</value>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsStorageService.StorageId">
+            <summary>
+            Gets the storage identifier.
+            </summary>
+            <returns>Contains the storage identifier.</returns>
+        </member>
+        <member name="P:Talegen.Storage.Net.Aws.AwsStorageService.RootPath">
+            <summary>
+            Gets or sets the name of the storage provider.
+            </summary>
+            <value>Gets or sets the name of the storage provider.</value>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.CopyFile(System.String,System.String,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="sourceFilePath"></param>
+            <param name="targetFilePath"></param>
+            <param name="overwrite"></param>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.CreateDirectory(System.String,System.Boolean)">
+            <summary>
+            This method is used to create a new directory.
+            </summary>
+            <param name="subFolderName">Contains the new directory name.</param>
+            <param name="silentExists">Contains a value indicating whether to ignore the directory exists exception.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.DeleteDirectory(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            This method is used to delete an existing directory.
+            </summary>
+            <param name="subFolderName">Contains the name of the directory to delete.</param>
+            <param name="recursive">Contains a value indicating whether to delete the directory recursively.</param>
+            <param name="silentNoExist">Contains a value indicating whether to ignore the directory does not exist exception.</param>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.DeleteFile(System.String,System.Boolean)">
+            <summary>
+            This method is used to delete an existing file.
+            </summary>
+            <param name="filePath">Contains the file path to delete.</param>
+            <param name="deleteDirectory">Contains a value indicating whether to delete the directory containing the file if contents are empty.</param>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.DeleteFiles(System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            This method is used to delete a list of files.
+            </summary>
+            <param name="filePathNames">Contains a list of file paths to delete.</param>
+            <param name="deleteDirectory">Contains a value indicating whether to delete the directory containing the file if contents are empty.</param>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.EmptyDirectory(System.String)">
+            <summary>
+            This method is used to empty an existing directory without removing it.
+            </summary>
+            <param name="subFolderName">Contains the name of the directory to empty.</param>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.DirectoryExists(System.String,System.Boolean)">
+            <summary>
+            This method is used to determine if a directory exists.
+            </summary>
+            <param name="subFolderName">Contains the name of the directory to check.</param>
+            <param name="silentExists">Contains a value indicating whether to ignore a storage exception.</param>
+            <returns>Returns a value indicating whether the directory exists.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.DirectoryExists(System.String)">
+            <summary>
+            This method is used to determine if a directory exists.
+            </summary>
+            <param name="subFolderName">Contains the name of the directory to check.</param>
+            <returns>Returns a value indicating whether the directory exists.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.FileExists(System.String)">
+            <summary>
+            This method is used to determine if a file object exists.
+            </summary>
+            <param name="filePath">Contains the name of the file object to check.</param>
+            <returns>Returns a value indicating whether the file object exists.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.FileHash(System.String)">
+            <summary>
+            This method is used to create a hash of the file contents.
+            </summary>
+            <param name="filePath">Contains the path to the file to hash.</param>
+            <returns>Returns a hash of the file contents.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.FindFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary>
+            This method is used to get the files from a directory.
+            </summary>
+            <param name="subFolderName">Contains the directory name to get the files.</param>
+            <param name="searchPattern">Contains an optional file name search pattern. If not specified, *.* is used.</param>
+            <param name="searchOption">Contains search options. If not specified, all sub-folders are searched for the file pattern.</param>
+            <returns>Returns a list of files in the directory path.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.MoveFile(System.String,System.String,System.Boolean)">
+            <summary>
+            This method is used to move a file.
+            </summary>
+            <param name="sourceFilePath">Contains a the path to the file that will be moved.</param>
+            <param name="targetFilePath">Contains the path to the target where the file is to be moved.</param>
+            <param name="overwrite">Contains a value indicating if the target should be overwritten if it already exists. Default is true.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:Talegen.Storage.Net.Core.StorageException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.ReadBinaryFile(System.String)">
+            <summary>
+            This method is used to read all the bytes from a binary file.
+            </summary>
+            <param name="path">Contains the path to the file to load and return.</param>
+            <returns>Returns a byte array containing the binary bytes of the target file.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:Talegen.Storage.Net.Core.StorageException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.ReadBinaryFile(System.String,System.IO.Stream)">
+            <summary>
+            This method is used to read all the bytes from a binary file to a provided stream.
+            </summary>
+            <param name="path">Contains the path to the file to load into the stream.</param>
+            <param name="outputStream">The stream to write the file to.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:Talegen.Storage.Net.Core.StorageException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.ReadTextFile(System.String,System.Text.Encoding)">
+            <summary>
+            This method is used to read all the bytes from a text file.
+            </summary>
+            <param name="path">Contains the path to the file to load and return.</param>
+            <param name="encoding">Contains the text encoding type. If none is specified, Encoding.Default is used.</param>
+            <returns>Returns a string containing the content of the target file.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.WriteBinaryFile(System.String,System.Byte[])">
+            <summary>
+            This method is used to write content to the specified path.
+            </summary>
+            <param name="path">Contains the fully qualified path, including file name, to the location in which the binary content shall be written.</param>
+            <param name="content">Contains a byte array of the content to be written.</param>
+            <returns>Returns a value indicating whether the write was successful.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.WriteBinaryFile(System.String,System.IO.Stream)">
+            <summary>
+            This method is used to write content to the specified path.
+            </summary>
+            <param name="path">Contains the fully qualified path, including file name, to the location in which the binary content shall be written.</param>
+            <param name="inputStream">Contains a stream of the content to be written.</param>
+            <returns>Returns a value indicating whether the write was successful.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:Talegen.Storage.Net.Core.StorageException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.WriteTextFile(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            This method is used to write content to the specified path.
+            </summary>
+            <param name="path">Contains the fully qualified path, including file name, to the location in which the text content shall be written.</param>
+            <param name="content">Contains a string of the content to be written.</param>
+            <param name="encoding">Contains the text file encoding. If none specified, Encoding.Default is used.</param>
+            <returns>Returns a value indicating whether the write was successful.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.GetS3FileInfo(System.String,System.String)">
+            <summary>
+            This method is used to create a new <see cref="T:Amazon.S3.IO.S3FileInfo" /> object for a given path.
+            </summary>
+            <param name="filePath">Contains the file path to abstract.</param>
+            <param name="bucketName">Contains an optional S3 bucket name.</param>
+            <returns>Returns a new <see cref="T:Amazon.S3.IO.S3FileInfo" /> object.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.GetS3DirectoryInfo(System.String,System.String)">
+            <summary>
+            This method is used to create a new <see cref="T:Amazon.S3.IO.S3DirectoryInfo" /> object for a given path.
+            </summary>
+            <param name="directoryPath">Contains the directory path to abstract.</param>
+            <param name="bucketName">Contains an optional S3 bucket name.</param>
+            <returns>Returns a new <see cref="T:Amazon.S3.IO.S3DirectoryInfo" /> object.</returns>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.Initialize">
+            <summary>
+            Initializes the internal storage service.
+            </summary>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.VerifyDirectoryNameRoot(System.String)">
+            <summary>
+            Verifies the directory name root path.
+            </summary>
+            <param name="subFolderName">Name of the sub folder to verify.</param>
+            <exception cref="T:Talegen.Storage.Net.Core.StorageException">
+            An exception is thrown if the root folder specified in <paramref name="subFolderName" /> is not rooted with workspace root folder path.
+            </exception>
+        </member>
+        <member name="M:Talegen.Storage.Net.Aws.AwsStorageService.LateralCopyInternal(System.String,System.String,System.Boolean)">
+            <summary>
+            Laterals the copy internal.
+            </summary>
+            <param name="sourceFilePath">The source file path.</param>
+            <param name="destFilePath">The dest file path.</param>
+            <param name="overwrite">Contains a value indicating if the target should be overwritten if it already exists.</param>
+            <returns>Returns a value indicating copy success.</returns>
+        </member>
+        <member name="T:Amazon.S3.IO.FileSystemType">
+            <summary>
+            Enumeration indicated whether a file system element is a file or directory.
+            </summary>
+        </member>
+        <member name="F:Amazon.S3.IO.FileSystemType.Directory">
+            <summary>
+            Type is a directory.
+            </summary>
+        </member>
+        <member name="F:Amazon.S3.IO.FileSystemType.File">
+            <summary>
+            Type is a file.
+            </summary>
+        </member>
+        <member name="T:Amazon.S3.IO.IS3FileSystemInfo">
+            <summary>
+            Common interface for both S3FileInfo and S3DirectoryInfo.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.Exists">
+            <summary>
+            Returns true if the item exists in S3.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.Extension">
+            <summary>
+            Returns the extension of the item.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.FullName">
+            <summary>
+            Returns the fully qualified path to the item.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.LastWriteTime">
+            <summary>
+            Returns the last modified time for this item from S3 in local timezone.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.LastWriteTimeUtc">
+            <summary>
+            Returns the last modified time for this item from S3 in UTC timezone.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.Name">
+            <summary>
+            Returns the name of the item without parent information.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.IS3FileSystemInfo.Type">
+            <summary>
+            Indicates what type of item this object represents.
+            </summary>
+        </member>
+        <member name="M:Amazon.S3.IO.IS3FileSystemInfo.Delete">
+            <summary>
+            Deletes this item from S3.
+            </summary>
+        </member>
+        <member name="T:Amazon.S3.IO.S3DirectoryInfo">
+            <summary>
+            Mimics the System.IO.DirectoryInfo for a virtual directory in S3. It exposes properties and methods for enumerating directories and files as well as
+            methods manipulate directories.
+            </summary>
+            <remarks>
+            <note type="note">It is important to keep in mind that S3 is not a filesystem. It is possible for S3 object keys to contain characters which are not not
+            legal file path characters, and so some pre-existing objects in a bucket that were created with other software may not be compatible with this class.</note>
+            </remarks>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.#ctor(Amazon.S3.IAmazonS3,System.String)">
+            <summary>
+            Initialize a new instance of the S3DirectoryInfo class for the specified S3 bucket.
+            </summary>
+            <param name="s3Client">S3 client which is used to access the S3 resources.</param>
+            <param name="bucket">Name of the S3 bucket.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.#ctor(Amazon.S3.IAmazonS3,System.String,System.String)">
+            <summary>
+            Initialize a new instance of the S3DirectoryInfo class for the specified S3 bucket and S3 object key.
+            </summary>
+            <param name="s3Client">S3 client which is used to access the S3 resources.</param>
+            <param name="bucket">Name of the S3 bucket.</param>
+            <param name="key">The S3 object key.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Bucket">
+            <summary>
+            The S3DirectoryInfo for the root of the S3 bucket.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Exists">
+             <summary>
+             Checks with S3 to see if the directory exists and if so returns true.
+            
+             Due to Amazon S3's eventual consistency model this property can return false for newly created buckets.
+             </summary>
+             <exception cref="T:System.Net.WebException"></exception>
+             <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Amazon#S3#IO#IS3FileSystemInfo#Extension">
+            <summary>
+            Returns empty string for directories.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.FullName">
+            <summary>
+            The full path of the directory including bucket name.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.LastWriteTime">
+            <summary>
+            Returns the last write time of the the latest file written to the directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.LastWriteTimeUtc">
+            <summary>
+            UTC converted version of LastWriteTime.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Name">
+            <summary>
+            Returns the name of the folder.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Parent">
+            <summary>
+            Return the S3DirectoryInfo of the parent directory.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Root">
+            <summary>
+            Returns the S3DirectroyInfo for the S3 account.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3DirectoryInfo.Type">
+            <summary>
+            Returns the type of file system element.
+            </summary>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.Create">
+            <summary>
+            Creates the directory in S3. If no object key was specified when creating the S3DirectoryInfo then the bucket will be created.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CreateSubdirectory(System.String)">
+            <summary>
+            Creates a sub directory inside the instance of S3DirectoryInfo.
+            </summary>
+            <param name="directory"></param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.Delete">
+            <summary>
+            Deletes all the files in this directory as well as this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <exception cref="T:Amazon.S3.Model.DeleteObjectsException"></exception>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.Delete(System.Boolean)">
+            <summary>
+            Deletes all the files in this directory as well as this directory. If recursive is set to true then all sub directories will be deleted as well.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <exception cref="T:Amazon.S3.Model.DeleteObjectsException"></exception>
+            <param name="recursive">If true then sub directories will be deleted as well.</param>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateDirectories">
+            <summary>
+            Enumerate the sub directories of this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of directories.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateDirectories(System.String)">
+            <summary>
+            Enumerate the sub directories of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all directories.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of directories that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateDirectories(System.String,System.IO.SearchOption)">
+            <summary>
+            Enumerate the sub directories of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all directories.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of directories that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFiles">
+            <summary>
+            Enumerate the files of this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFiles(System.String)">
+            <summary>
+            Enumerate the sub directories of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFiles(System.String,System.IO.SearchOption)">
+            <summary>
+            Enumerate the files of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFileSystemInfos">
+            <summary>
+            Enumerate the files of this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFileSystemInfos(System.String)">
+            <summary>
+            Enumerate the files of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.EnumerateFileSystemInfos(System.String,System.IO.SearchOption)">
+            <summary>
+            Enumerate the files of this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An enumerable collection of files that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetDirectory(System.String)">
+            <summary>
+            Returns the S3DirectoryInfo for the specified sub directory.
+            </summary>
+            <param name="directory">Directory to get the S3DirectroyInfo for.</param>
+            <returns>The S3DirectoryInfo for the specified sub directory.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetDirectories">
+            <summary>
+            Returns an array of S3DirectoryInfos for the directories in this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of directories.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetDirectories(System.String)">
+            <summary>
+            Returns an array of S3DirectoryInfos for the directories in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <returns>An array of files that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetDirectories(System.String,System.IO.SearchOption)">
+            <summary>
+            Returns an array of S3DirectoryInfos for the directories in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all directories.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of directories that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFile(System.String)">
+            <summary>
+            Returns the S3FileInfo for the specified file.
+            </summary>
+            <param name="filename">File to get the S3FileInfo for.</param>
+            <returns>The S3FileInfo for the specified file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFiles">
+            <summary>
+            Returns an array of S3FileInfos for the files in this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFiles(System.String)">
+            <summary>
+            Returns an array of S3FileInfos for the files in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFiles(System.String,System.IO.SearchOption)">
+            <summary>
+            Returns an array of S3FileInfos for the files in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFileSystemInfos">
+            <summary>
+            Returns an array of IS3FileSystemInfos for the files in this directory.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFileSystemInfos(System.String)">
+            <summary>
+            Returns an array of IS3FileSystemInfos for the files in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files that matches searchPattern.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.GetFileSystemInfos(System.String,System.IO.SearchOption)">
+            <summary>
+            Returns an array of IS3FileSystemInfos for the files in this directory.
+            </summary>
+            <param name="searchPattern">The search string. The default pattern is "*", which returns all files.</param>
+            <param name="searchOption">
+            One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The
+            default value is TopDirectoryOnly.
+            </param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>An array of files that matches searchPattern and searchOption.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyTo(System.String,System.String)">
+            <summary>
+            Copies the files from this directory to the target directory specified by the bucket and object key.
+            </summary>
+            <param name="newBucket">The target bucket to copy to.</param>
+            <param name="newKey">The target object key which represents a directory in S3.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyTo(System.String,System.String,System.DateTime)">
+            <summary>
+            Copies the files from this directory to the target directory specified by the bucket and object key. Only files that have changed since the
+            changeSince date will be copied.
+            </summary>
+            <param name="newBucket">The target bucket to copy to.</param>
+            <param name="newKey">The target object key which represents a directory in S3.</param>
+            <param name="changesSince">Date which files must have changed since in ordered to be copied.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyTo(Amazon.S3.IO.S3DirectoryInfo)">
+            <summary>
+            Copies the files from this directory to the target directory.
+            </summary>
+            <param name="newLoc">The target directory to copy to.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyTo(Amazon.S3.IO.S3DirectoryInfo,System.DateTime)">
+            <summary>
+            Copies the files from this directory to the target directory. Only files that have changed since the changeSince date will be copied.
+            </summary>
+            <param name="newLoc">The target directory to copy to.</param>
+            <param name="changesSince">Date which files must have changed since in ordered to be copied.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyToLocal(System.String)">
+            <summary>
+            Copies the files from the S3 directory to the local file system in the location indicated by the path parameter.
+            </summary>
+            <param name="path">The location on the local file system to copy the files to.</param>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>DirectoryInfo for the local directory where files are copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyToLocal(System.String,System.DateTime)">
+            <summary>
+            Copies the files from the S3 directory to the local file system in the location indicated by the path parameter. Only files that have been modified
+            since the changesSince property will be copied.
+            </summary>
+            <param name="path">The location on the local file system to copy the files to.</param>
+            <param name="changesSince">Date which files must have changed since in ordered to be copied.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>DirectoryInfo for the local directory where files are copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyFromLocal(System.String)">
+            <summary>
+            Copies files from the local file system to S3 in this directory. Sub directories are copied as well.
+            </summary>
+            <param name="path">The local file system path where the files are to be copied.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo where the files are copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.CopyFromLocal(System.String,System.DateTime)">
+            <summary>
+            Copies files from the local file system to S3 in this directory. Sub directories are copied as well. Only files that have been modified since the
+            changesSince property will be copied.
+            </summary>
+            <param name="path">The local file system path where the files are to copy.</param>
+            <param name="changesSince">Date which files must have changed since in ordered to be copied.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo where the files are copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.MoveTo(System.String,System.String)">
+            <summary>
+            Moves the directory to the target directory specified by the bucket and object key.
+            </summary>
+            <param name="newBucket">The target bucket to move to.</param>
+            <param name="newKey">The target object key which represents a directory in S3.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.MoveTo(Amazon.S3.IO.S3DirectoryInfo)">
+            <summary>
+            Moves the directory to the target S3 directory.
+            </summary>
+            <param name="newLoc">The target directory to copy to.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.MoveToLocal(System.String)">
+            <summary>
+            Moves the files from the S3 directory to the local file system in the location indicated by the path parameter.
+            </summary>
+            <param name="path">The location on the local file system to move the files to.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>DirectoryInfo for the local directory where files are moved to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.MoveFromLocal(System.String)">
+            <summary>
+            Moves files from the local file system to S3 in this directory. Sub directories are moved as well.
+            </summary>
+            <param name="path">The local file system path where the files are to be moved.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3DirectoryInfo where the files are moved to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.ToString">
+            <summary>
+            Implement the ToString method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3DirectoryInfo.WaitTillBucketS3StateIsConsistent(System.Boolean)">
+            <summary>
+            Creating and deleting buckets can sometimes take a little bit of time. To make sure users of this API do not experience the side effects of the
+            eventual consistency we block until the state change has happened.
+            </summary>
+            <param name="exists"></param>
+        </member>
+        <member name="T:Amazon.S3.IO.S3FileInfo">
+            <summary>
+            Mimics the System.IO.FileInfo for a file in S3. It exposes properties and methods manipulating files in S3.
+            </summary>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.#ctor(Amazon.S3.IAmazonS3,System.String,System.String)">
+            <summary>
+            Initialize a new instance of the S3FileInfo class for the specified S3 bucket and S3 object key.
+            </summary>
+            <param name="s3Client">S3 client which is used to access the S3 resources.</param>
+            <param name="bucket">Name of the S3 bucket.</param>
+            <param name="key">The S3 object key.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Directory">
+            <summary>
+            Returns the parent S3DirectoryInfo.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.DirectoryName">
+            <summary>
+            The full name of parent directory.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Exists">
+            <summary>
+            Checks S3 if the file exists in S3 and return true if it does.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Extension">
+            <summary>
+            Gets the file's extension.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.FullName">
+            <summary>
+            Returns the full path including the bucket.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.LastWriteTime">
+            <summary>
+            Returns the last time the file was modified.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.LastWriteTimeUtc">
+            <summary>
+            Returns the last time the file was modified in UTC.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Length">
+            <summary>
+            Returns the content length of the file.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Name">
+            <summary>
+            Returns the file name without its directory name.
+            </summary>
+        </member>
+        <member name="P:Amazon.S3.IO.S3FileInfo.Type">
+            <summary>
+            Returns the type of file system element.
+            </summary>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(System.String,System.String)">
+            <summary>
+            Copies this file's content to the file indicated by the S3 bucket and object key. If the file already exists in S3 than an ArgumentException is thrown.
+            </summary>
+            <param name="newBucket">S3 bucket to copy the file to.</param>
+            <param name="newKey">S3 object key to copy the file to.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(System.String,System.String,System.Boolean)">
+            <summary>
+            Copies this file's content to the file indicated by the S3 bucket and object key. If the file already exists in S3 and overwrite is set to false
+            than an ArgumentException is thrown.
+            </summary>
+            <param name="newBucket">S3 bucket to copy the file to.</param>
+            <param name="newKey">S3 object key to copy the file to.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3 and overwrite is set to false.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(Amazon.S3.IO.S3DirectoryInfo)">
+            <summary>
+            Copies this file to the target directory. If the file already exists in S3 than an ArgumentException is thrown.
+            </summary>
+            <param name="dir">Target directory where to copy the file to.</param>
+            <exception cref="T:System.ArgumentException">If the directory does not exist.</exception>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(Amazon.S3.IO.S3DirectoryInfo,System.Boolean)">
+            <summary>
+            Copies this file to the target directory. If the file already exists in S3 and overwrite is set to false than an ArgumentException is thrown.
+            </summary>
+            <param name="dir">Target directory where to copy the file to.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.ArgumentException">If the directory does not exist.</exception>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3 and overwrite is set to false.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(Amazon.S3.IO.S3FileInfo)">
+            <summary>
+            Copies this file to the location indicated by the passed in S3FileInfo. If the file already exists in S3 than an ArgumentException is thrown.
+            </summary>
+            <param name="file">The target location to copy this file to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyTo(Amazon.S3.IO.S3FileInfo,System.Boolean)">
+            <summary>
+            Copies this file to the location indicated by the passed in S3FileInfo. If the file already exists in S3 and overwrite is set to false than an
+            ArgumentException is thrown.
+            </summary>
+            <param name="file">The target location to copy this file to.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3 and overwrite is set to false.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the newly copied file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyToLocal(System.String)">
+            <summary>
+            Copies from S3 to the local file system. If the file already exists on the local file system than an ArgumentException is thrown.
+            </summary>
+            <param name="destFileName">The path where to copy the file to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists locally.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>FileInfo for the local file where file is copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyToLocal(System.String,System.Boolean)">
+            <summary>
+            Copies from S3 to the local file system. If the file already exists on the local file system and overwrite is set to false than an ArgumentException
+            is thrown.
+            </summary>
+            <param name="destFileName">The path where to copy the file to.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists locally and overwrite is set to false.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>FileInfo for the local file where file is copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyFromLocal(System.String)">
+            <summary>
+            Copies the file from the local file system to S3. If the file already exists in S3 than an ArgumentException is thrown.
+            </summary>
+            <param name="srcFileName">Location of the file on the local file system to copy.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo where the file is copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CopyFromLocal(System.String,System.Boolean)">
+            <summary>
+            Copies the file from the local file system to S3. If the file already exists in S3 and overwrite is set to false than an ArgumentException is thrown.
+            </summary>
+            <param name="srcFileName">Location of the file on the local file system to copy.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3 and overwrite is set to false.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo where the file is copied to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.Create">
+            <summary>
+            Returns a Stream that can be used to write data to S3.
+            </summary>
+            <remarks><note>The content will not be written to S3 until the Stream is closed.</note></remarks>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>Stream to write content to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.CreateText">
+            <summary>
+            Returns a StreamWriter that can be used to write data to S3.
+            </summary>
+            <remarks><note>The content will not be written to S3 until the Stream is closed.</note></remarks>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>Stream to write content to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.Delete">
+            <summary>
+            Deletes the from S3.
+            </summary>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveTo(System.String,System.String)">
+            <summary>
+            Moves the file to a a new location in S3.
+            </summary>
+            <param name="targetBucket">Bucket to move the file to.</param>
+            <param name="targetKey">Object key to move the file to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveTo(Amazon.S3.IO.S3DirectoryInfo)">
+            <summary>
+            Moves the file to a a new location in S3.
+            </summary>
+            <param name="path">The target directory to copy to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveTo(Amazon.S3.IO.S3FileInfo)">
+            <summary>
+            Moves the file to a a new location in S3.
+            </summary>
+            <param name="file">The target file to copy to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo for the target location.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveToLocal(System.String)">
+            <summary>
+            Moves the file from S3 to the local file system in the location indicated by the path parameter.
+            </summary>
+            <param name="path">The location on the local file system to move the file to.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists locally.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>FileInfo for the local file where file is moved to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveFromLocal(System.String)">
+            <summary>
+            Moves the file from the local file system to S3 in this directory. If the file already exists in S3 than an ArgumentException is thrown.
+            </summary>
+            <param name="path">The local file system path where the files are to be moved.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists locally.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo where the file is moved to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.MoveFromLocal(System.String,System.Boolean)">
+            <summary>
+            Moves the file from the local file system to S3 in this directory. If the file already exists in S3 and overwrite is set to false than an
+            ArgumentException is thrown.
+            </summary>
+            <param name="path">The local file system path where the files are to be moved.</param>
+            <param name="overwrite">Determines whether the file can be overwritten.</param>
+            <exception cref="T:System.IO.IOException">If the file already exists in S3 and overwrite is set to false.</exception>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo where the file is moved to.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.OpenRead">
+            <summary>
+            Returns a Stream for reading the contents of the file.
+            </summary>
+            <exception cref="T:System.IO.IOException">The file is already open.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>Stream to read from.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.OpenText">
+            <summary>
+            Returns a StreamReader for reading the contents of the file.
+            </summary>
+            <exception cref="T:System.IO.IOException">The file is already open.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>StreamReader to read from.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.OpenWrite">
+            <summary>
+            Returns a Stream for writing to S3. If the file already exists it will be overwritten.
+            </summary>
+            <remarks><note>The content will not be written to S3 until the Stream is closed.</note></remarks>
+            <exception cref="T:System.IO.IOException">The file is already open.</exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>Stream to write from.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.Replace(System.String,System.String,System.String,System.String)">
+            <summary>
+            Replaces the destination file with the content of this file and then deletes the original file. If a backup location is specified then the content
+            of destination file is backup to it.
+            </summary>
+            <param name="destinationBucket">Destination bucket of this file will be copy to.</param>
+            <param name="destinationKey">Destination object key of this file will be copy to.</param>
+            <param name="backupBucket">Backup bucket to store the contents of the destination file.</param>
+            <param name="backupKey">Backup object key to store the contents of the destination file.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the destination file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.Replace(Amazon.S3.IO.S3DirectoryInfo,Amazon.S3.IO.S3DirectoryInfo)">
+            <summary>
+            Replaces the destination file with the content of this file and then deletes the original file. If a backupDir is specified then the content of
+            destination file is backup to it.
+            </summary>
+            <param name="destDir">Where the contents of this file will be copy to.</param>
+            <param name="backupDir">If specified the destFile is backup to it.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the destination file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.Replace(Amazon.S3.IO.S3FileInfo,Amazon.S3.IO.S3FileInfo)">
+            <summary>
+            Replaces the destination file with the content of this file and then deletes the original file. If a backupFile is specified then the content of
+            destination file is backup to it.
+            </summary>
+            <param name="destFile">Where the contents of this file will be copy to.</param>
+            <param name="backupFile">If specified the destFile is backup to it.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns>S3FileInfo of the destination file.</returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.ReplaceLocal(System.String,System.String)">
+            <summary>
+            Replaces the content of the destination file on the local file system with the content from this file from S3. If a backup file is specified then
+            the content of the destination file is backup to it.
+            </summary>
+            <param name="destinationFileName"></param>
+            <param name="destinationBackupFileName"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.IO.IOException"></exception>
+            <exception cref="T:System.Net.WebException"></exception>
+            <exception cref="T:Amazon.S3.AmazonS3Exception"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Amazon.S3.IO.S3FileInfo.ToString">
+            <summary>
+            Implement the ToString method.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
