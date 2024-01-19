@@ -1169,5 +1169,16 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Amazon.Util.PaginatedResource`1">
+            <summary>
+            Paginated resource.
+            </summary>
+            <typeparam name="U">Type of resource.</typeparam>
+        </member>
+        <member name="T:Amazon.Util.PaginatedResourceFactory">
+            <summary>
+            This class implements paginated resource functionality.
+            </summary>
+        </member>
     </members>
 </doc>

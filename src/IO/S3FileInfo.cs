@@ -22,7 +22,10 @@
 
 namespace Amazon.S3.IO
 {
+    using System;
     using System.Globalization;
+    using System.IO;
+    using System.Threading;
     using Amazon.S3.Model;
     using Talegen.Common.Core.Extensions;
 

@@ -22,6 +22,8 @@
 
 namespace Amazon.S3.IO
 {
+    using System;
+    using System.IO;
     using Amazon.S3.Model;
     using Amazon.Util;
     using Talegen.Common.Core.Extensions;
