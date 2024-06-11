@@ -12,12 +12,12 @@
     <RepositoryUrl>https://github.com/Talegen/Talegen.Storage.Net.Aws</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>storage</PackageTags>
-    <PackageReleaseNotes>Updated packages.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated packages, implemented new temp file and path generation methods.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2</FileVersion>
     <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
@@ -46,9 +46,9 @@
         </None>
     </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AWSSDK.S3" Version="3.7.305.13" />
-    <PackageReference Include="Talegen.Common.Core" Version="1.0.12" />
-    <PackageReference Include="Talegen.Storage.Net.Core" Version="1.0.5" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.309.3" />
+    <PackageReference Include="Talegen.Common.Core" Version="1.0.15" />
+    <PackageReference Include="Talegen.Storage.Net.Core" Version="1.0.6" />
   </ItemGroup>
     
     

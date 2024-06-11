@@ -86,9 +86,33 @@ namespace Talegen.Storage.Net.Aws
         /// <value>Gets or sets the name of the storage provider.</value>
         public string RootPath { get; set; }
 
+        /// <summary>
+        /// Gets the temporary path for the storage provider.
+        /// </summary>
+        public string TempPath => this.RootPath;
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// This method is used to generate a temporary file name.
+        /// </summary>
+        /// <param name="extension">Contains an optional extension.</param>
+        /// <param name="includePath">Contains a value indicating whether a temporary path should be generated and included in the result.</param>
+        /// <returns>Returns the generated file name.</returns>
+        public string GenerateTempFileName(string extension = null, bool includePath = false)
+        {
+            return includePath ? Path.Combine(this.GenerateTempDirectory(), Path.GetRandomFileName() + extension) : Path.GetRandomFileName() + extension;
+        }
+
+        /// <summary>
+        /// This method is used to generate a temporary directory.
+        /// </summary>
+        /// <param name="useGuidNames">Contains a value indicating whether the random sub-folder should be a GUID.</param>
+        /// <returns>Returns a temporary directory created inside the root path.</returns>
+        public string GenerateTempDirectory(bool useGuidNames = false)
+        {
+            return Path.Combine(this.TempPath, useGuidNames ? Guid.NewGuid().ToString() : Path.GetRandomFileName());
+        }
 
         /// <summary>
         /// </summary>
